@@ -1,0 +1,6 @@
+FROM microsoft/aspnet
+
+# REMARK: Temporary workaround for Windows DNS client weirdness
+RUN PowerShell -Command {Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ServerPriorityTimeLimit -Value 0 -Type DWord}
+
+COPY ./websrc c:/inetpub/wwwroot
